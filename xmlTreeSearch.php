@@ -13,6 +13,7 @@ class xmlTreeSearch
     private $tree = array();
     private $flatTree = array();
     private $resultTree = array();
+    private $resultString = '';
     private $rawData = '';
     public $iter = 0;
 
@@ -29,11 +30,6 @@ class xmlTreeSearch
     public function addElement($element, $level)
     {
         $this->flatTree[] = [$level => $element];
-        for ($n = 0; $n < $level; $n++) {
-            echo "-";
-        }
-        echo "$element";
-        echo "\n";
     }
 
     /**
@@ -42,15 +38,14 @@ class xmlTreeSearch
      */
     public function findOtag($str, $pLvl = 0)
     {
-        echo($this->iter);
-        $this->iter += 1;
+
         if (strlen($str) == 0) {
             return;
         }
         $buf = '';
 
         for ($i = 0; $i < strlen($str); $i++) {
-            echo ".";
+
             if (substr($str, $i, 1) === '<') {
                 if (strlen($buf) !== 0) {
                     $this->addElement($buf, $pLvl);
@@ -173,40 +168,29 @@ class xmlTreeSearch
                 array_push($bugInNodes, $key);
             }
         }, $this->flatTree, array_keys($this->flatTree));
-        print_r($bugInNodes);
-//        print_r($this->flatTree);die;
+
         //check left & right square brackets
-        //fixme
 
         $buf_noTags = array();
         $buf_tags = array();
         for ($i = 0; $i < count($bugInNodes); $i += 2) {
-            echo "\033[32m-\e[39m";
+
             if ($this->getTypeSqBrs($this->flatTree[$bugInNodes[$i]][0]) === 'left' && $this->getTypeSqBrs($this->flatTree[$bugInNodes[$i + 1]][0]) === 'right') {
                 for ($j = $bugInNodes[$i] + 1; $j <= $bugInNodes[$i + 1]; $j++) {
-                    echo "\033[31m.\033[39m";
                     if ($this->getNodeType($this->flatTree[$j][0]) === 'noTag') {
                         array_push($buf_noTags, $this->flatTree[$j][0]);
                         unset($this->flatTree[$j]);
-                        echo "\033[93m" . $j . "\e[39m";
+                        $this->iter += 1;
                     } elseif ($this->getNodeType($this->flatTree[$j][0]) !== 'noTag') {
                         array_push($buf_tags, $this->flatTree[$j][0]);
                         unset($this->flatTree[$j]);
-                        echo "\033[94m" . $j . "\e[39m";
                     }
                 }
 
-
                 $buf_block = array_merge($buf_noTags, $buf_tags);
 
-                echo "\n";
-                print_r($buf_block);
-                print_r($buf_noTags);
-                print_r($buf_tags);
-                echo "\n";
                 for ($k = $bugInNodes[$i] + 1; $k <= $bugInNodes[$i + 1]; $k++) {
                     $this->flatTree[$k][0] = array_shift($buf_block);
-                    echo "\033[91m[" . $k . "] : " . $this->flatTree[$k][0] . "\e[39m\n";
                 }
                 $buf_tags = [];
                 $buf_noTags = [];
@@ -214,9 +198,11 @@ class xmlTreeSearch
             }
 
         }
-        echo "\n";
-        $this->printFlatTree();
-
+        $flat = array();
+        for ($index = 0; $index < count($this->flatTree); $index++) {
+            array_push($flat, $this->flatTree[$index][0]);
+        }
+        $this->resultString = implode('', $flat);
     }
 
     public function printFlatTree()
@@ -224,7 +210,6 @@ class xmlTreeSearch
         for ($i = 0; $i < count($this->flatTree); $i++) {
             printf("|%4d|", $i);
             foreach ($this->flatTree[$i] as $k => $v) {
-                //print(" ".$k." | ".$v."\n");
                 printf(" %s | %50s | \n", $k, $v);
             }
         }
@@ -246,5 +231,15 @@ class xmlTreeSearch
         echo "<pre>";
         print_r($this->tree);
         echo "</pre>";
+    }
+
+    public function getResultString()
+    {
+        return $this->resultString;
+    }
+
+    public function getNumOfIter()
+    {
+        return $this->iter;
     }
 }
