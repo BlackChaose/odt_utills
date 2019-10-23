@@ -9,11 +9,11 @@
 
 запуск: 
 
-# починка:
+#### починка:
 
 `php san_pb2.php -s "<path to input file>" -d "<path to output file>"`
 
-# чистка от разделителей страницы (<text:soft-page-break/>)
+#### чистка от разделителей страницы (<text:soft-page-break/>)
 
 `php san_pb.php -s "<path to input file>" -d "<path to output file>"`
 
