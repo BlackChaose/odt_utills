@@ -54,11 +54,11 @@ if($ok){
 
 
 
-    $parse->getNodeName('<tag1:p red>');
+    echo $parse->getNodeName('<tag1:p red>')[0];
     echo "\n";
-    $parse->getNodeName('</tag1:p>');
+    echo $parse->getNodeName('</tag1:p>')[0];
     echo "\n";
-    $parse->getNodeName('<tag2:p />');
+    echo $parse->getNodeName('<tag2:p />')[0];
     echo "\n";
     //$parse->printTree();
 

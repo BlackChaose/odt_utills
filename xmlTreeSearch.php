@@ -100,20 +100,19 @@ class xmlTreeSearch
             preg_match_all('/<\S*/', $str,$name);
             foreach($name[0] as $key => $value){
                 if(substr($value,0,2)=='</'){
-                    echo "--->\n".$name[0][$key];
-                    $result[0][$key] = substr($name[0][$key],3,strlen($name[0][$key]));
+                    $result[0][$key] = substr($name[0][$key],2, strlen($name[0][$key])-2);
                 }elseif(substr($value,0,1)==='<'){
                     $result[0][$key] = substr($name[0][$key], 1, strlen($name[0][$key])-1);
                 }
 
                 if(substr($value,-1,2)==='/>'){
-                    $result[0][$key] = substr($name[0][$key],0,strlen($name[0][$key])-2);
+                    $result[0][$key] = substr($result[0][$key],0,strlen($result[0][$key])-2);
                 }elseif(substr($value,-1,1)==='>'){
-                    $result[0][$key] = substr($name[0][$key],0,strlen($name[0][$key])-1);
+                    $result[0][$key] = substr($result[0][$key],0,strlen($result[0][$key])-1);
                 }
             }
         }
-        print_r($result[0]);
+        return($result[0]);
     }
 
     public function convFlatToTree()
