@@ -127,6 +127,11 @@ class xmlTreeSearch
         //in process
     }
 
+    /**
+     * @param $string node
+     *
+     * @return bool true if not bugs and false if are bugged
+     */
     public function checkSqBrs($string)
     {
         $leftSqBr = 0;
@@ -141,9 +146,27 @@ class xmlTreeSearch
         return ($leftSqBr == $rightSqBr);
     }
 
+    public function getTypeSqBrs($string)
+    {
+        $leftSqBr = 0;
+        $rightSqBr = 0;
+        for ($i = 0; $i < strlen($string); $i++) {
+            if (substr($string, $i, 1) == '[') {
+                $leftSqBr += 1;
+            } elseif (substr($string, $i, 1) == ']') {
+                $rightSqBr += 1;
+            }
+        }
+
+        return ($leftSqBr > $rightSqBr) ? 'left' : 'right';
+    }
+
+    /**
+     * clear FlatTree by bugs
+     */
     public function clearFlatTree()
     {
-        //var_dump($this->flatTree);die;
+        //get all bugged indexes of tbs tpl
         $bugInNodes = array();
         array_map(function ($val, $key) use (&$bugInNodes) {
             if (!$this->checkSqBrs($val[0])) {
@@ -151,6 +174,23 @@ class xmlTreeSearch
             }
         }, $this->flatTree, array_keys($this->flatTree));
         print_r($bugInNodes);
+//        print_r($this->flatTree);die;
+        //check left & right square brackets
+        //fixme
+        for ($i = 0; $i < count($bugInNodes); $i += 2) {
+            echo "\033[32m-\e[39m";
+            if ($this->getTypeSqBrs($this->flatTree[$bugInNodes[$i]][0]) === 'left' && $this->getTypeSqBrs($this->flatTree[$bugInNodes[$i + 1]][0]) === 'right') {
+                for ($j = $bugInNodes[$i] + 1; $j < $bugInNodes[$i + 1]; $j++) {
+                    echo "\033[31m.\033[39m";
+                    if ($this->getNodeType($this->flatTree[$j][0]) == 'singleTag') {
+                        unset($this->flatTree[$j]);
+                        echo "\033[39m!";
+                    }
+                }
+            }
+        }
+        echo "\n";
+        $this->printFlatTree();
 
     }
 
