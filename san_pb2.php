@@ -36,13 +36,15 @@ $zip->Open($zipFile);
 
 $ok = $zip->FileExists($dataFile);
 $tst1= "<root> txt <tag1> txt2 <tag2 /> txt3 <tag3 />     </tag1> txt4  <tagx><tagxx><tagxxx>Argh!</tagxxx></tagxx></tagx></root>";
+
 if($ok){
     $xml = $zip->FileRead($dataFile);
     //echo $xml;
     //$parse = new \Helpers\xmlTreeSearch($xml);
     $parse = new \Helpers\xmlTreeSearch($tst1);
     $parse->initTree();
-    $parse->printTree();
+    $parse->printFlatTree();
+    //$parse->printTree();
 
     //$result = array();
     //$xmlNew=preg_match_all('/.*(\[.*(<.*>).*\]).*\/.*/gm',$xml,$result);
