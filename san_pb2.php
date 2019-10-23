@@ -44,6 +44,22 @@ if($ok){
     $parse = new \Helpers\xmlTreeSearch($tst1);
     $parse->initTree();
     $parse->printFlatTree();
+
+    echo $parse->getNodeType('<tag1:p red>');
+    echo "\n";
+    echo $parse->getNodeType('</tag1:p>');
+    echo "\n";
+    echo $parse->getNodeType('<tag2:p />');
+    echo "\n";
+
+
+
+    $parse->getNodeName('<tag1:p red>');
+    echo "\n";
+    $parse->getNodeName('</tag1:p>');
+    echo "\n";
+    $parse->getNodeName('<tag2:p />');
+    echo "\n";
     //$parse->printTree();
 
     //$result = array();

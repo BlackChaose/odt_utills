@@ -72,6 +72,11 @@ class xmlTreeSearch
 
     }
 
+    /**
+     * @param $s    node's text
+     *
+     * @return string result
+     */
     public function getNodeType($s)
     {
         $str = trim($s);
@@ -80,11 +85,35 @@ class xmlTreeSearch
             return 'openTag'; // opened tag
         } elseif (substr($str, 0, 1) === '<' && substr($str, 1, 1) === '/') {
             return 'closeTag'; // closed tag
-        } elseif (substr($str, 0, 1) === '<' && substr($str, -2, 2) !== '/>'){
+        } elseif (substr($str, 0, 1) === '<' && substr($str, -2, 2) === '/>'){
             return 'singleTag'; // single opened&closed tag
-        }else{
-            return 'noTag';
+        } else{
+            return 'noTag'; // node are not tag
         }
+    }
+
+    public function getNodeName($s){
+        $str = trim($s);
+        $name = [];
+        $result = [];
+        if($this->getNodeType($str) !== 'noTag'){
+            preg_match_all('/<\S*/', $str,$name);
+            foreach($name[0] as $key => $value){
+                if(substr($value,0,2)=='</'){
+                    echo "--->\n".$name[0][$key];
+                    $result[0][$key] = substr($name[0][$key],3,strlen($name[0][$key]));
+                }elseif(substr($value,0,1)==='<'){
+                    $result[0][$key] = substr($name[0][$key], 1, strlen($name[0][$key])-1);
+                }
+
+                if(substr($value,-1,2)==='/>'){
+                    $result[0][$key] = substr($name[0][$key],0,strlen($name[0][$key])-2);
+                }elseif(substr($value,-1,1)==='>'){
+                    $result[0][$key] = substr($name[0][$key],0,strlen($name[0][$key])-1);
+                }
+            }
+        }
+        print_r($result[0]);
     }
 
     public function convFlatToTree()
