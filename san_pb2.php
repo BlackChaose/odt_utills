@@ -35,7 +35,7 @@ $zip = new clsTbsZip();
 $zip->Open($zipFile);
 
 $ok = $zip->FileExists($dataFile);
-$tst1= "<root> txt <tag1> txt2 <tag2 /> txt3 <tag3 />     </tag1> txt4  <tagx><tagxx><tagxxx>Argh!</tagxxx></tagxx></tagx></root>";
+$tst1= "<root> txt <tag1> txt2 <tag2 /> txt3 <tag3 /><text:p>[var0;block=tbs:row;magnet=row]</text:p> </tag1> txt4  <tagx><tagxx><tagxxx><text:p>Кенгуру [var3;block=tbs:<page:break />row;magnet=row]!</text:p></tagxxx></tagxx></tagx><text:p>[var1;block=tbs:row;magnet=row]</text:p></root>";
 
 if($ok){
     $xml = $zip->FileRead($dataFile);
@@ -44,22 +44,26 @@ if($ok){
     $parse = new \Helpers\xmlTreeSearch($tst1);
     $parse->initTree();
     $parse->printFlatTree();
+    $parse->clearFlatTree();
 
-    echo $parse->getNodeType('<tag1:p red>');
-    echo "\n";
-    echo $parse->getNodeType('</tag1:p>');
-    echo "\n";
-    echo $parse->getNodeType('<tag2:p />');
-    echo "\n";
+//    echo $parse->getNodeType('<tag1:p red>');
+//    echo "\n";
+//    echo $parse->getNodeType('</tag1:p>');
+//    echo "\n";
+//    echo $parse->getNodeType('<tag2:p />');
+//    echo "\n";
+//
+//
+//
+//    echo $parse->getNodeName('<tag1:p red>')[0];
+//    echo "\n";
+//    echo $parse->getNodeName('</tag1:p>')[0];
+//    echo "\n";
+//    echo $parse->getNodeName('<tag2:p />')[0];
+//    echo "\n";
+//    echo $parse->getNodeName('Просто обычный текст')[0];
+//    echo "\n";
 
-
-
-    echo $parse->getNodeName('<tag1:p red>')[0];
-    echo "\n";
-    echo $parse->getNodeName('</tag1:p>')[0];
-    echo "\n";
-    echo $parse->getNodeName('<tag2:p />')[0];
-    echo "\n";
     //$parse->printTree();
 
     //$result = array();

@@ -12,6 +12,7 @@ class xmlTreeSearch
 {
     private $tree = array();
     private $flatTree = array();
+    private $resultTree = array();
     private $rawData = '';
     public $iter = 0;
 
@@ -73,9 +74,9 @@ class xmlTreeSearch
     }
 
     /**
-     * @param $s    node's text
+     * @param $s node's text
      *
-     * @return string result
+     * @return string result  type of node
      */
     public function getNodeType($s)
     {
@@ -85,38 +86,71 @@ class xmlTreeSearch
             return 'openTag'; // opened tag
         } elseif (substr($str, 0, 1) === '<' && substr($str, 1, 1) === '/') {
             return 'closeTag'; // closed tag
-        } elseif (substr($str, 0, 1) === '<' && substr($str, -2, 2) === '/>'){
+        } elseif (substr($str, 0, 1) === '<' && substr($str, -2, 2) === '/>') {
             return 'singleTag'; // single opened&closed tag
-        } else{
+        } else {
             return 'noTag'; // node are not tag
         }
     }
 
-    public function getNodeName($s){
+    /**
+     * @param $s    node
+     *
+     * @return mixed node's name or null
+     */
+    public function getNodeName($s)
+    {
         $str = trim($s);
         $name = [];
         $result = [];
-        if($this->getNodeType($str) !== 'noTag'){
-            preg_match_all('/<\S*/', $str,$name);
-            foreach($name[0] as $key => $value){
-                if(substr($value,0,2)=='</'){
-                    $result[0][$key] = substr($name[0][$key],2, strlen($name[0][$key])-2);
-                }elseif(substr($value,0,1)==='<'){
-                    $result[0][$key] = substr($name[0][$key], 1, strlen($name[0][$key])-1);
+        if ($this->getNodeType($str) !== 'noTag') {
+            preg_match_all('/<\S*/', $str, $name);
+            foreach ($name[0] as $key => $value) {
+                if (substr($value, 0, 2) == '</') {
+                    $result[0][$key] = substr($name[0][$key], 2, strlen($name[0][$key]) - 2);
+                } elseif (substr($value, 0, 1) === '<') {
+                    $result[0][$key] = substr($name[0][$key], 1, strlen($name[0][$key]) - 1);
                 }
 
-                if(substr($value,-1,2)==='/>'){
-                    $result[0][$key] = substr($result[0][$key],0,strlen($result[0][$key])-2);
-                }elseif(substr($value,-1,1)==='>'){
-                    $result[0][$key] = substr($result[0][$key],0,strlen($result[0][$key])-1);
+                if (substr($value, -1, 2) === '/>') {
+                    $result[0][$key] = substr($result[0][$key], 0, strlen($result[0][$key]) - 2);
+                } elseif (substr($value, -1, 1) === '>') {
+                    $result[0][$key] = substr($result[0][$key], 0, strlen($result[0][$key]) - 1);
                 }
             }
         }
-        return($result[0]);
+        return ($result[0] ?? null);
     }
 
     public function convFlatToTree()
     {
+        //in process
+    }
+
+    public function checkSqBrs($string)
+    {
+        $leftSqBr = 0;
+        $rightSqBr = 0;
+        for ($i = 0; $i < strlen($string); $i++) {
+            if (substr($string, $i, 1) == '[') {
+                $leftSqBr += 1;
+            } elseif (substr($string, $i, 1) == ']') {
+                $rightSqBr += 1;
+            }
+        }
+        return ($leftSqBr == $rightSqBr);
+    }
+
+    public function clearFlatTree()
+    {
+        //var_dump($this->flatTree);die;
+        $bugInNodes = array();
+        array_map(function ($val, $key) use (&$bugInNodes) {
+            if (!$this->checkSqBrs($val[0])) {
+                array_push($bugInNodes, $key);
+            }
+        }, $this->flatTree, array_keys($this->flatTree));
+        print_r($bugInNodes);
 
     }
 
@@ -126,7 +160,18 @@ class xmlTreeSearch
             printf("|%4d|", $key);
             foreach ($value as $k => $v) {
                 //print(" ".$k." | ".$v."\n");
-                printf(" %s | %10s | \n", $k, $v);
+                printf(" %s | %50s | \n", $k, $v);
+            }
+        }
+    }
+
+    public function printResultTree()
+    {
+        foreach ($this->resultTree as $key => $value) {
+            printf("|%4d|", $key);
+            foreach ($value as $k => $v) {
+                //print(" ".$k." | ".$v."\n");
+                printf(" %s | %50s | \n", $k, $v);
             }
         }
     }
