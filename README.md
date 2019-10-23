@@ -24,3 +24,14 @@
 
  `<text:p text:style-name="P1">К[krit_w.10.n<text:soft-page-break/>um_pok_plus_krit]
  </text:p>`
+ 
+ результат починки:
+
+`<text:p text:style-name="P1">[krit_w.1.name_krit]<text:span text:style-name="T13"></text:span>
+</text:p>`
+
+`<text:p text:style-name="P1">К[krit_w.4.num_pok_plus_krit]<text:soft-page-break/>
+</text:p>`
+
+ `<text:p text:style-name="P1">К[krit_w.10.num_pok_plus_krit]<text:soft-page-break/>
+ </text:p>`
