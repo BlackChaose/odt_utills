@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/BlackChaose/odt_utills.svg?branch=master)](https://travis-ci.org/BlackChaose/odt_utills) [![Maintainability](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/maintainability)](https://codeclimate.com/github/BlackChaose/odt_utills/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/test_coverage)](https://codeclimate.com/github/BlackChaose/odt_utills/test_coverage)
 
-[![License](https://poser.pugx.org/nikita_kalitin/odt_utills/license)](https://packagist.org/packages/nikita_kalitin/odt_utills)[![Latest Stable Version](https://poser.pugx.org/nikita_kalitin/odt_utills/v/stable)](https://packagist.org/packages/nikita_kalitin/odt_utills)[![Latest Unstable Version](https://poser.pugx.org/nikita_kalitin/odt_utills/v/unstable)](https://packagist.org/packages/nikita_kalitin/odt_utills)
+[![License](https://poser.pugx.org/nikita_kalitin/odt_utills/license)](https://packagist.org/packages/nikita_kalitin/odt_utills)[![Latest Unstable Version](https://poser.pugx.org/nikita_kalitin/odt_utills/v/unstable)](https://packagist.org/packages/nikita_kalitin/odt_utills)
 ---
 ### тестовая утилита для чистки *.odt файлов ###
 ***при работе с шаблонами [OpenTBS](https://github.com/Skrol29/opentbs) часто возникают проблемы с поломкой файла шаблона. Добавляются стили и/или разделители старниц. Данная утилита чинит такой файл.***
