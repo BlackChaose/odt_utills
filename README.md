@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BlackChaose/odt_utills.svg?branch=master)](https://travis-ci.org/BlackChaose/odt_utills)
+[![Build Status](https://travis-ci.org/BlackChaose/odt_utills.svg?branch=master)](https://travis-ci.org/BlackChaose/odt_utills) [![Maintainability](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/maintainability)](https://codeclimate.com/github/BlackChaose/odt_utills/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/test_coverage)](https://codeclimate.com/github/BlackChaose/odt_utills/test_coverage)
 ---
 ### тестовая утилита для чистки *.odt файлов ###
 ***при работе с шаблонами [OpenTBS](https://github.com/Skrol29/opentbs) часто возникают проблемы с поломокой файла шаблона. Добавляются стили и/или разделители старниц. Данная утилита чинит такой файл.***
