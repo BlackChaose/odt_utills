@@ -205,6 +205,9 @@ class xmlTreeSearch
         $this->resultString = implode('', $flat);
     }
 
+    /**
+     * @codeCoverageIgnoreStart
+     */
     public function printFlatTree()
     {
         for ($i = 0; $i < count($this->flatTree); $i++) {
@@ -232,7 +235,13 @@ class xmlTreeSearch
         print_r($this->tree);
         echo "</pre>";
     }
+    /**
+     * @codeCoverageIgnoreEnd
+     */
 
+    /**
+     * @return string
+     */
     public function getResultString()
     {
         return $this->resultString;

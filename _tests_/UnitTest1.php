@@ -20,6 +20,8 @@ class StackTest extends TestCase
 
         $prs->clearFlatTree();
 
+        $this->assertSame(6,$prs->getNumOfIter());
+
         $this->assertSame($testModel, $prs->getResultString());
 
     }
