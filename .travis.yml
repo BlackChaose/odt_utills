@@ -7,3 +7,4 @@ php:
 install:
   - composer install
   - composer dumpautoload
+script: ./vendor/bin/phpunit ./_tests_/UnitTest1.php 
