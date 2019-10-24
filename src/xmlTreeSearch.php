@@ -6,7 +6,7 @@
  * Time: 14:17
  */
 
-namespace Helpers;
+namespace OdtHelper;
 
 class xmlTreeSearch
 {

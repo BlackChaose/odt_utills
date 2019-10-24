@@ -1,14 +1,14 @@
 <?php
 /**
- * sanitize odt file -> delete page_breaks tags
- *
+ * CLI utility
+ * sanitize odt file
+ * 22-24/10/2019
+ * nikita.s.kalitin@gmail.com
  */
+use OdtHelper\xmlTreeSearch;
 
-include_once('./lib/tbszip.php');
-require_once('./xmlTreeSearch.php');
+require_once ('vendor/autoload.php');
 $options = getopt("s:d:v:");
-
-
 
 if(empty($options)){
     echo "-s <path to source> -d <path to dst> \n";
@@ -41,7 +41,7 @@ $ok = $zip->FileExists($dataFile);
 if($ok){
     $xml = $zip->FileRead($dataFile);
 
-    $parse = new \Helpers\xmlTreeSearch($xml);
+    $parse = new xmlTreeSearch($xml);
 
     $parse->initTree();
 

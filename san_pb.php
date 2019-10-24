@@ -1,11 +1,14 @@
 <?php
 /**
- * sanitize odt file -> delete page_breaks tags
- *
+ * CLI utility
+ * sanitize odt file (delete page-breakers)
+ * 22-24/10/2019
+ * nikita.s.kalitin@gmail.com
  */
-//set the correct xml headers to output to browser
-//header("Content-type: text/xml");
-include_once('./lib/tbszip.php');
+
+use OdtHelper\xmlTreeSearch;
+
+require_once ('vendor/autoload.php');
 $options = getopt("s:d:v:");
 
 print_r($options);
