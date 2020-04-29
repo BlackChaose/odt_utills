@@ -2,10 +2,9 @@
 
 [![License](https://poser.pugx.org/nikita_kalitin/odt_utills/license)](https://packagist.org/packages/nikita_kalitin/odt_utills)[![Latest Unstable Version](https://poser.pugx.org/nikita_kalitin/odt_utills/v/unstable)](https://packagist.org/packages/nikita_kalitin/odt_utills)
 ---
-### тестовая утилита для чистки *.odt файлов ###
+### утилита для пересборки *.odt файлов ###
 ***при работе с шаблонами [OpenTBS](https://github.com/Skrol29/opentbs) часто возникают проблемы с поломкой файла шаблона. Добавляются стили и/или разделители старниц. Данная утилита чинит такой файл.***
 
-* утилита в процесее разработки
 * утилита: пересобирает xml в архиве (см. формат odt) 
 * поэтому: могут сбиться стили после пересборки
 
@@ -14,7 +13,7 @@
 используется: [tbszip](https://github.com/Skrol29/tbszip)
 
 ---
-запуск: 
+запуск в режиме консоли 
 
 #### починка:
 
@@ -24,6 +23,21 @@
 
 `php san_pb.php -s "<path to input file>" -d "<path to output file>"`
 
+---
+
+использование класса-обёртки
+
+```
+use OdtHelper\TemplateRepair;
+
+    /**
+     * @param $path_to_inputfile
+     * @param $path_to_outputfile
+     * @return string
+     */
+
+    TemplateRepair::repair($path_to_inputfile, $path_to_outputfile);
+```
 ---
 
 поломки типа:

@@ -2,9 +2,17 @@
 
 
 namespace OdtHelper;
-//require_once ('vendor/autoload.php');
+/**
+ * Class TemplateRepair
+ * @package OdtHelper
+ */
 class TemplateRepair
 {
+    /**
+     * @param $path_to_inputfile
+     * @param $path_to_outputfile
+     * @return string
+     */
     public static function repair($path_to_inputfile, $path_to_outputfile){
         try {
             $dataFile = "content.xml";
