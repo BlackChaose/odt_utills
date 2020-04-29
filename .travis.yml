@@ -1,0 +1,19 @@
+
+---
+
+language: php
+php:
+  - '7.2'
+env:
+  global:
+      CC_TEST_REPORTER_ID=22ae63d9113152c8ade27712d701582873296afc494c36eda5c8272c7b05f464
+install:
+  - composer install
+  - composer dumpautoload
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script: ./vendor/bin/phpunit --whitelist ./src  --coverage-clover clover.xml ./_tests_/UnitTest.php
+after_script:
+ - ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
