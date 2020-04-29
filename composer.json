@@ -1,7 +1,5 @@
 {
   "name": "nikita_kalitin/odt_utills",
-  "type": "utility",
-  "description": "Simple CLI filter for .odt files - resotre boroken OpenTBS templates",
   "keywords": ["OpenTBS", "utility", "CLI"],
   "license": "MIT",
   "authors":[
