@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/BlackChaose/odt_utills.svg?branch=master)](https://travis-ci.org/BlackChaose/odt_utills) [![Maintainability](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/maintainability)](https://codeclimate.com/github/BlackChaose/odt_utills/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/73655cfbb82b71146b14/test_coverage)](https://codeclimate.com/github/BlackChaose/odt_utills/test_coverage)
-
-[![License](https://poser.pugx.org/nikita_kalitin/odt_utills/license)](https://packagist.org/packages/nikita_kalitin/odt_utills)[![Latest Unstable Version](https://poser.pugx.org/nikita_kalitin/odt_utills/v/unstable)](https://packagist.org/packages/nikita_kalitin/odt_utills)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 ### утилита для пересборки *.odt файлов ###
 ***при работе с шаблонами [OpenTBS](https://github.com/Skrol29/opentbs) часто возникают проблемы с поломкой файла шаблона. Добавляются стили и/или разделители старниц. Данная утилита чинит такой файл.***
